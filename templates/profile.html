@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}My Profile – MediAI{% endblock %}
+{% block content %}
+<h4 class="fw-bold mb-1">My Profile</h4>
+<p class="text-muted mb-4">Keep your medical information up to date for better diagnosis accuracy</p>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card text-center p-4">
+      <div style="font-size:5rem;">👤</div>
+      <h5 class="fw-bold mt-2">{{ patient.full_name if patient else session.get('full_name') }}</h5>
+      <p class="text-muted small">{{ patient.email if patient else '' }}</p>
+      <span class="badge bg-primary rounded-pill px-3">{{ session.get('role','patient')|upper }}</span>
+      {% if patient and patient.age %}
+      <hr>
+      <div class="row text-start g-2 mt-1">
+        <div class="col-6"><small class="text-muted">Age</small><br><strong>{{ patient.age }} yrs</strong></div>
+        <div class="col-6"><small class="text-muted">Gender</small><br><strong>{{ patient.gender or 'N/A' }}</strong></div>
+        <div class="col-6"><small class="text-muted">Blood Group</small><br><strong>{{ patient.blood_group or 'N/A' }}</strong></div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h6 class="mb-0"><i class="bi bi-pencil me-2"></i>Edit Medical Profile</h6>
+      </div>
+      <div class="card-body">
+        <form method="POST">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Age</label>
+              <input type="number" name="age" class="form-control" value="{{ patient.age if patient and patient.age else '' }}" placeholder="e.g. 25" min="1" max="120">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Gender</label>
+              <select name="gender" class="form-select">
+                <option value="">Select gender</option>
+                {% for g in ['Male','Female','Other','Prefer not to say'] %}
+                <option {{ 'selected' if patient and patient.gender == g }}>{{ g }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Blood Group</label>
+              <select name="blood_group" class="form-select">
+                <option value="">Select blood group</option>
+                {% for bg in ['A+','A-','B+','B-','AB+','AB-','O+','O-'] %}
+                <option {{ 'selected' if patient and patient.blood_group == bg }}>{{ bg }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">Known Allergies</label>
+              <input type="text" name="allergies" class="form-control"
+                value="{{ patient.allergies if patient and patient.allergies else '' }}"
+                placeholder="e.g. Penicillin, Peanuts, Dust">
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">Medical History</label>
+              <textarea name="medical_history" class="form-control" rows="3"
+                placeholder="e.g. Diabetes (2019), Hypertension, Asthma">{{ patient.medical_history if patient and patient.medical_history else '' }}</textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary px-4 py-2">
+                <i class="bi bi-check-circle me-2"></i>Save Profile
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

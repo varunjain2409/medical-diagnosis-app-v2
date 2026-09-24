@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}MediAI – AI Medical Diagnosis Assistant{% endblock %}
+{% block content %}
+<div style="margin-left:0; margin-top:0;">
+  <!-- Hero Section -->
+  <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem;">
+    <div class="text-center text-white" style="max-width: 700px;">
+      <div style="font-size: 5rem; margin-bottom: 1rem;">🏥</div>
+      <h1 class="display-4 fw-bold mb-3">MediAI</h1>
+      <p class="lead mb-2 opacity-75">AI-Powered Medical Diagnosis Assistant</p>
+      <p class="mb-5 opacity-60">Describe your symptoms. Get an intelligent preliminary diagnosis powered by Machine Learning and AI-generated reports.</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="{{ url_for('register') }}" class="btn btn-light btn-lg px-5 fw-semibold">
+          <i class="bi bi-person-plus me-2"></i>Get Started Free
+        </a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-5">
+          <i class="bi bi-box-arrow-in-right me-2"></i>Login
+        </a>
+      </div>
+
+      <!-- Feature Pills -->
+      <div class="mt-5 d-flex gap-2 flex-wrap justify-content-center">
+        <span class="badge rounded-pill" style="background:rgba(255,255,255,0.2); padding:8px 16px;">🤖 ML Disease Classifier</span>
+        <span class="badge rounded-pill" style="background:rgba(255,255,255,0.2); padding:8px 16px;">📋 AI-Generated Reports</span>
+        <span class="badge rounded-pill" style="background:rgba(255,255,255,0.2); padding:8px 16px;">🗄️ SQL Patient Records</span>
+        <span class="badge rounded-pill" style="background:rgba(255,255,255,0.2); padding:8px 16px;">🔒 Secure & Private</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="container py-5">
+    <h2 class="text-center fw-bold mb-5">How MediAI Works</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 text-center p-4">
+          <div style="font-size:3rem;">🩺</div>
+          <h5 class="fw-semibold mt-3">Enter Symptoms</h5>
+          <p class="text-muted">Type or select your symptoms from a comprehensive list of 38+ clinical symptoms.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 text-center p-4">
+          <div style="font-size:3rem;">🧠</div>
+          <h5 class="fw-semibold mt-3">AI Analysis</h5>
+          <p class="text-muted">Our Random Forest ML model analyzes symptom patterns against 14+ disease profiles.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 text-center p-4">
+          <div style="font-size:3rem;">📄</div>
+          <h5 class="fw-semibold mt-3">Get Your Report</h5>
+          <p class="text-muted">Receive a detailed AI-generated report with recommendations, severity rating, and doctor referrals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

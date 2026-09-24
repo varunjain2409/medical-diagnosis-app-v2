@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Diagnosis History – MediAI{% endblock %}
+{% block content %}
+<h4 class="fw-bold mb-1">Diagnosis History</h4>
+<p class="text-muted mb-4">All your past health check records</p>
+
+{% if records %}
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Date & Time</th>
+          <th>Condition</th>
+          <th>Symptoms</th>
+          <th>Confidence</th>
+          <th>Severity</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in records %}
+        <tr>
+          <td class="text-muted">{{ r.id }}</td>
+          <td class="text-muted small">{{ r.created_at[:16].replace('T',' ') }}</td>
+          <td class="fw-semibold">{{ r.predicted_disease }}</td>
+          <td>
+            {% for s in r.symptoms.split(',')[:3] %}
+            <span class="badge bg-light text-secondary">{{ s.strip().replace('_',' ').title() }}</span>
+            {% endfor %}
+            {% if r.symptoms.split(',')|length > 3 %}
+            <span class="text-muted small">+{{ r.symptoms.split(',')|length - 3 }} more</span>
+            {% endif %}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <div class="progress confidence-bar" style="width:60px;">
+                <div class="progress-bar bg-primary" style="width:{{ r.confidence }}%"></div>
+              </div>
+              <small>{{ r.confidence }}%</small>
+            </div>
+          </td>
+          <td>
+            <span class="badge badge-{{ r.severity }}">{{ r.severity|upper }}</span>
+          </td>
+          <td>
+            <a href="{{ url_for('view_report', diag_id=r.id) }}" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-file-text me-1"></i>Report
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="card text-center p-5">
+  <div style="font-size:4rem;">📋</div>
+  <h5 class="mt-3">No diagnoses yet</h5>
+  <p class="text-muted">Start your first check to see records here</p>
+  <a href="{{ url_for('diagnose') }}" class="btn btn-primary">Start Diagnosis</a>
+</div>
+{% endif %}
+{% endblock %}

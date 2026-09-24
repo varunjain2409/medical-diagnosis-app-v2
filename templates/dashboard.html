@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Dashboard – MediAI{% endblock %}
+{% block content %}
+<h4 class="fw-bold mb-1">Welcome, {{ session.get('full_name') }} 👋</h4>
+<p class="text-muted mb-4">Here's your health overview</p>
+
+<!-- Stats Row -->
+<div class="row g-3 mb-4">
+  <div class="col-sm-6 col-lg-3">
+    <div class="card stat-card p-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Total Diagnoses</div>
+          <div class="fs-4 fw-bold">{{ history|length }}</div>
+        </div>
+        <div style="font-size:2rem;">🩺</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="card p-3" style="border-left:4px solid #16a34a;">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Profile Status</div>
+          <div class="fs-6 fw-semibold">{{ 'Complete ✓' if profile and profile.age else 'Incomplete' }}</div>
+        </div>
+        <div style="font-size:2rem;">👤</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="card p-3" style="border-left:4px solid #ca8a04;">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Last Check</div>
+          <div class="fs-6 fw-semibold">
+            {{ history[0].created_at[:10] if history else 'No record' }}
+          </div>
+        </div>
+        <div style="font-size:2rem;">📅</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="card p-3" style="border-left:4px solid #dc2626;">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Last Diagnosis</div>
+          <div class="fs-6 fw-semibold">{{ history[0].predicted_disease[:18] + '...' if history and history[0].predicted_disease|length > 18 else (history[0].predicted_disease if history else 'None') }}</div>
+        </div>
+        <div style="font-size:2rem;">💊</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Action -->
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h6 class="mb-0"><i class="bi bi-clock-history me-2"></i>Recent Diagnoses</h6>
+        <a href="{{ url_for('history') }}" class="btn btn-sm btn-light">View All</a>
+      </div>
+      <div class="card-body p-0">
+        {% if history %}
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Date</th>
+                <th>Condition</th>
+                <th>Confidence</th>
+                <th>Severity</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for h in history %}
+              <tr>
+                <td class="text-muted small">{{ h.created_at[:10] }}</td>
+                <td class="fw-semibold">{{ h.predicted_disease }}</td>
+                <td>
+                  <div class="progress confidence-bar" style="width:80px;">
+                    <div class="progress-bar" style="width:{{ h.confidence }}%;background:{% if h.confidence > 70 %}#16a34a{% elif h.confidence > 40 %}#ca8a04{% else %}#dc2626{% endif %}"></div>
+                  </div>
+                  <small class="text-muted">{{ h.confidence }}%</small>
+                </td>
+                <td>
+                  <span class="badge badge-{{ h.severity }}">{{ h.severity|upper }}</span>
+                </td>
+                <td>
+                  <a href="{{ url_for('view_report', diag_id=h.id) }}" class="btn btn-sm btn-outline-primary">View</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5 text-muted">
+          <div style="font-size:3rem;">📋</div>
+          <p>No diagnoses yet. Start your first check!</p>
+          <a href="{{ url_for('diagnose') }}" class="btn btn-primary">New Diagnosis</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card mb-3 text-center p-4" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+      <div style="font-size:3rem;">🩺</div>
+      <h6 class="fw-bold mt-2">Start a New Diagnosis</h6>
+      <p class="text-muted small">Describe your symptoms and get an AI-powered analysis</p>
+      <a href="{{ url_for('diagnose') }}" class="btn btn-primary">Check Symptoms</a>
+    </div>
+    {% if not (profile and profile.age) %}
+    <div class="card text-center p-4" style="background:#fffbeb; border:1px solid #fde68a;">
+      <div style="font-size:2rem;">⚠️</div>
+      <h6 class="fw-semibold mt-2">Complete Your Profile</h6>
+      <p class="text-muted small">Add your medical details for better diagnosis accuracy</p>
+      <a href="{{ url_for('profile') }}" class="btn btn-warning btn-sm">Update Profile</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

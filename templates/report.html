@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Diagnosis Report – MediAI{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="fw-bold mb-0">Diagnosis Report #{{ diag.id }}</h4>
+    <p class="text-muted small">{{ diag.created_at[:16].replace('T',' ') }}</p>
+  </div>
+  <a href="{{ url_for('history') }}" class="btn btn-outline-secondary">
+    <i class="bi bi-arrow-left me-1"></i>Back
+  </a>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card mb-3">
+      <div class="card-header"><h6 class="mb-0">Diagnosis Summary</h6></div>
+      <div class="card-body">
+        <h5 class="fw-bold">{{ diag.predicted_disease }}</h5>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <div class="progress flex-grow-1" style="height:10px;border-radius:6px;">
+            <div class="progress-bar bg-primary" style="width:{{ diag.confidence }}%;border-radius:6px;"></div>
+          </div>
+          <span class="fw-semibold">{{ diag.confidence }}%</span>
+        </div>
+        <span class="badge badge-{{ diag.severity }} mb-3">{{ diag.severity|upper }}</span>
+        <hr>
+        <small class="text-muted fw-semibold">Symptoms Reported</small>
+        <div class="mt-1">
+          {% for s in diag.symptoms.split(',') %}
+          <span class="badge bg-primary bg-opacity-10 text-primary me-1 mb-1">{{ s.strip().replace('_',' ').title() }}</span>
+          {% endfor %}
+        </div>
+        <hr>
+        <small class="text-muted fw-semibold">Recommendations</small>
+        <p class="small mt-1">{{ diag.recommendations }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h6 class="mb-0"><i class="bi bi-file-medical me-2"></i>Full AI Report</h6>
+        <button class="btn btn-sm btn-outline-primary" onclick="window.print()">
+          <i class="bi bi-printer me-1"></i>Print
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="report-box">{{ diag.ai_report }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
