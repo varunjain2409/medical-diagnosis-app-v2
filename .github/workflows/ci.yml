@@ -33,5 +33,6 @@ jobs:
         run: |
           python -c "import joblib; m = joblib.load('ml/disease_model.pkl'); print('model loaded:', type(m).__name__)"
 
-      - name: Check the app module imports cleanly
-        run: python -c "import ast, pathlib; [ast.parse(p.read_text(encoding='utf-8')) for p in pathlib.Path('templates').rglob('*.html')]"
+      - name: Validate the Jinja templates
+        run: |
+          python -c "from jinja2 import Environment; import pathlib; e = Environment(); [e.parse(p.read_text(encoding='utf-8')) for p in pathlib.Path('templates').rglob('*.html')]; print('templates OK')"
