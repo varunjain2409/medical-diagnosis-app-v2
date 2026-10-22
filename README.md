@@ -1,3 +1,27 @@
+<div align="center">
+
+<a href="https://github.com/varunjain2409/medical-diagnosis-app-v2"><img src="https://img.shields.io/badge/GitHub-varunjain2409%2Fmedical-diagnosis-app-v2-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
+<a href="https://github.com/varunjain2409/medical-diagnosis-app-v2/stargazers"><img src="https://img.shields.io/github/stars/varunjain2409/=for-the-badge&logo=github&logoColor=white" alt="Stars"/></a>
+<a href="https://github.com/varunjain2409/medical-diagnosis-app-v2/network/members"><img src="https://img.shields.io/github/forks/varunjain2409/=for-the-badge&logo=github&logoColor=white" alt="Forks"/></a>
+<a href="https://github.com/varunjain2409/medical-diagnosis-app-v2/commits"><img src="https://img.shields.io/github/last-commit/varunjain2409/=for-the-badge&logo=github&logoColor=white" alt="Last commit"/></a>
+<a href="https://github.com/varunjain2409/medical-diagnosis-app-v2/issues"><img src="https://img.shields.io/github/issues/varunjain2409/=for-the-badge&logo=github&logoColor=white" alt="Issues"/></a>
+<a href="https://github.com/varunjain2409/medical-diagnosis-app-v2/graphs/contributors"><img src="https://img.shields.io/github/contributors/varunjain2409/=for-the-badge&logo=github&logoColor=white" alt="Contributors"/></a>
+<img src="https://img.shields.io/github/repo-size/varunjain2409/=for-the-badge&logo=github&logoColor=white" alt="Size"/>
+<img src="https://img.shields.io/github/languages/top/varunjain2409/=for-the-badge&logo=github&logoColor=white" alt="Top language"/>
+<img src="https://img.shields.io/badge/License-MIT-00C2A8?style=for-the-badge&logo=open%20source%20initiative&logoColor=white" alt="License"/>
+
+<img src="https://img.shields.io/badge/=for-the-badge&logoColor=white" alt="Python-3.x-blue?logo=python"/>
+<img src="https://img.shields.io/badge/=for-the-badge&logoColor=white" alt="Flask-000000?logo=flask"/>
+<img src="https://img.shields.io/badge/=for-the-badge&logoColor=white" alt="SQLite-003B57?logo=sqlite"/>
+<img src="https://img.shields.io/badge/=for-the-badge&logoColor=white" alt="scikit--learn-F7931E?logo=scikitlearn"/>
+<img src="https://img.shields.io/badge/=for-the-badge&logoColor=white" alt="Bootstrap-7952B3?logo=bootstrap"/>
+<img src="https://img.shields.io/badge/=for-the-badge&logoColor=white" alt="HTML5-E34F26?logo=html5"/>
+<img src="https://img.shields.io/badge/=for-the-badge&logoColor=white" alt="Jinja-E43D2B?logo=jinja"/>
+
+</div>
+
+---
+
 # 🏥 MediAI – AI-Powered Medical Diagnosis Assistant
 
 A full-stack college project built with **Python + SQL + AI/ML**.
@@ -117,3 +141,14 @@ Hypertension, Allergic Rhinitis, Anxiety/Panic Disorder, GERD
 
 This is a student project for educational purposes.
 Not a substitute for professional medical diagnosis.
+
+
+---
+
+<div align="center">
+
+**Built by [Varun Jain](https://github.com/varunjain2409) - [Portfolio](https://varunjain2409.github.io/portfolio/) - [LinkedIn](https://www.linkedin.com/in/varunjain2409)**
+
+Found this useful? Please star the repo on [GitHub](https://github.com/varunjain2409/medical-diagnosis-app-v2). Thanks!
+
+</div>
